@@ -1,10 +1,25 @@
-const express = require('express');
+const express= require('express');
 const app = express();
- 
-app.get('/', (req, res) => {
-  res.send("Hello");
+const bodyParser= require('body-parser')
+const mongodb= require('./data/database');
+
+
+const port = process.env.PORT || 3000;
+
+app.use(bodyParser.json());
+
+
+
+app.use('/',require('./routes'));
+
+
+mongodb.initDb((err)=>{
+    if(err){
+        console.log(err);
+    }
+    else{
+        app.listen(port,()=>{console.log(`Database is listining and node Running on port  ${port}`)});
+    }
+
 });
- 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Web  and data Server is listening at port ' + (process.env.PORT || 3000));
-});
+
