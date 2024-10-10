@@ -1,11 +1,11 @@
 
-const { passport } = require('passport');
-const router = require("express").Router();
 
+const router = require("express").Router();
+const passport = require("passport");
 
 
 router.use('/' , require('./swagger'))
-router.use('/users', require('./users.js'));
+router.use("/users", require("./users"));
 router.get('/', (req,res)=>{
   
     res.send('hello word')
